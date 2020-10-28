@@ -1,8 +1,4 @@
 #include "../include/equtils.h"
-#include <iostream>
-#include <vector>
-
-using namespace std;
 
 // Func to check if an element has the var
 bool equtils::hasVar(string element) {
