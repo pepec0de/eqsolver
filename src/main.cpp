@@ -10,13 +10,8 @@ string getSubstring(string str, unsigned int start, unsigned int end);
 string getSubstring(string str, int fromEnd);
 string toStr(char value);
 
-//bool hasVar(string element);
-//bool hasVarWpow(string element);
-//float getVarPow(string element);
-
 float getEqGrade(vector<string> eqArr);
 void solveEq(vector<string> eqArr);
-//float sum(vector<float> mVector);
 
 equtils eqUtils;
 
@@ -101,43 +96,6 @@ string toStr(char value) {
 	return str;
 }
 /// EQUATION FUNCTIONS
-// Func to check if an element has the Var
-/*bool hasVar(string element) {
-	for (unsigned int i = 0; i < element.size(); i++) {
-		if (element[i] == VAR) {
-			return true;
-		}
-	}
-	return false;
-}*/
-
-// Func to check if an element has a pow with the Var
-/*bool hasVarWpow(string element) {
-	// Suponemos que seria 1x^2 : x^
-	for (unsigned int i = 0; i < element.size(); i++) {
-		if (element[i] == VAR && element[i+1] == '^') {
-			return true;
-		}
-	}
-	return false;
-}
-
-// Func to get the pow of the var
-float getVarPow(string element) {
-	string strPow;
-	if (eqUtils.hasVarWpow(element)) {
-		for (unsigned int i = 0; i < element.size(); i++) {
-			if (element[i] == eqUtils.VAR) {
-				for (unsigned int j = i+2; j < element.size(); j++) {
-					strPow += element[j];
-				}
-				return stof(strPow);
-			}
-		}
-	}
-	return 1;
-}*/
-
 float getEqGrade(vector<string> eqArr) {
 	float grade = 0;
 	for (unsigned int i = 0; i < eqArr.size(); i++) {
@@ -189,11 +147,3 @@ void solveEq(vector<string> eqArr) {
 		cout << "Resultado: " << eqUtils.VAR << " = " << eqUtils.sum(polyVal)/eqUtils.sum(polyVar) << endl;
 	}
 }
-/*
-float sum(vector<float> mVector) {
-	float result = 0;
-	for (unsigned int i = 0; i < mVector.size(); i++) {
-		result += mVector[i];
-	}
-	return result;
-}*/
