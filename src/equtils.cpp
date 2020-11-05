@@ -2,7 +2,7 @@
 
 // Func to check if an element has the var
 bool equtils::hasVar(string element) {
-    for (unsigned int i = 0; i < element.size(); i++) {
+	for (unsigned int i = 0; i < element.size(); i++) {
         if (element[i] == VAR) {
             return true;
         }
@@ -51,4 +51,18 @@ float equtils::sum(vector<float> mVector) {
         result += mVector[i];  
     }
     return result;
+}
+
+// Funcion para simplificar y ordenar una ecuacion/polinomio
+vector<string> equtils::getTidied(vector<string> eqArr) {
+    vector<string> simplified;
+    
+    vector<string> poly1, poly2;
+
+    for (unsigned int i = 0; i < eqArr.size(); i++) {
+        if (eqArr[i] == "=") {
+            sameFind = true;
+        }
+    }
+    return simplified;
 }

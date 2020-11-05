@@ -32,7 +32,7 @@ string stringutils::getSubstring(string str, unsigned int start, unsigned int en
 string stringutils::getSubstring(string str, int fromEnd) {
 	string result = "";
 	if (fromEnd < 0) {
-		for (int i = 0; i < (fromEnd + str.size()); i++) {
+		for (int i = 0; i < (fromEnd + (int)str.size()); i++) {
 			result.push_back(str[i]);
 		}
 	}

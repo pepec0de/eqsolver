@@ -16,6 +16,10 @@ class equtils {
         float getElementVar(string element);
 
         float sum(vector<float> mVector);
+
+        vector<string> getTidied(vector<string> eqArr);
+        float getEqGrade(vector<string> eqArr);
+
         /*
         equtils();
         virtual ~equtils();

@@ -58,42 +58,48 @@ float getEqGrade(vector<string> eqArr) {
 	return grade;
 }
 
-void solveEq(vector<string> eqArr) {
-	if (getEqGrade(eqArr) == 1) {
-		// Hacemos dos vectores de polinomios
-		// Uno con los elementos del primer lado y el otro con los del otro lado
-		vector<string> poly1, poly2;
-		bool sameFind = false;
-		for (unsigned int i = 0; i < eqArr.size(); i++) {
-			if (eqArr[i] == "=") {
-				// Pasamos al otro vector
-				sameFind = true;
-				continue;
+void solveEq(vector<string> eqArr, int level) {
+	switch (getEqGrade(eqArr)) {
+		case 1: // ECUACION DE PRIMER NIVEL
+			// Hacemos dos vectores de polinomios
+			// Uno con los elementos del primer lado y el otro con los del otro lado
+			vector<string> poly1, poly2;
+			bool sameFind = false;
+			for (unsigned int i = 0; i < eqArr.size(); i++) {
+				if (eqArr[i] == "=") {
+					// Pasamos al otro vector
+					sameFind = true;
+					continue;
+				}
+				if (sameFind) {
+					poly2.push_back(eqArr[i]);
+				} else {
+					poly1.push_back(eqArr[i]);
+				}
 			}
-			if (sameFind) {
-				poly2.push_back(eqArr[i]);
-			} else {
-				poly1.push_back(eqArr[i]);
+			// Creamos otros dos vectores para almacenar las cifras
+			// En el primero guardaremos las Xs y en el segundo los independientes
+			vector<float> polyVar, polyVal;
+			for (unsigned int i = 0; i < poly1.size(); i++) {
+				if (eqUtils.hasVar(poly1[i])) {
+					polyVar.push_back(stof(strUtils.getSubstring(poly1[i], -1)));
+				} else {
+					polyVal.push_back(stof(poly1[i])*(-1));
+				}
 			}
-		}
-		// Creamos otros dos vectores para almacenar las cifras
-		// En el primero guardaremos las Xs y en el segundo los independientes
-		vector<float> polyVar, polyVal;
-		for (unsigned int i = 0; i < poly1.size(); i++) {
-			if (eqUtils.hasVar(poly1[i])) {
-				polyVar.push_back(stof(strUtils.getSubstring(poly1[i], -1)));
-			} else {
-				polyVal.push_back(stof(poly1[i])*(-1));
+			for (unsigned int i = 0; i < poly2.size(); i++) {
+				if (eqUtils.hasVar(poly2[i])) {
+					polyVar.push_back(stof(strUtils.getSubstring(poly1[i], -2))*(-1));
+				} else {
+					polyVal.push_back(stof(poly2[i]));
+				}
 			}
-		}
-		for (unsigned int i = 0; i < poly2.size(); i++) {
-			if (eqUtils.hasVar(poly2[i])) {
-				polyVar.push_back(stof(strUtils.getSubstring(poly1[i], -2))*(-1));
-			} else {
-				polyVal.push_back(stof(poly2[i]));
-			}
-		}
-		// Ahora solo tenemos que imprimir : sum(polyVal)/sum(polyVar)
-		cout << "Resultado: " << eqUtils.VAR << " = " << eqUtils.sum(polyVal)/eqUtils.sum(polyVar) << endl;
+			// Ahora solo tenemos que imprimir : sum(polyVal)/sum(polyVar)
+			cout << "Resultado: " << eqUtils.VAR << " = " << eqUtils.sum(polyVal)/eqUtils.sum(polyVar) << endl;
+		break;
+		
+		case 2: // ECUACION DE SEGUNDO GRADO
+			
+		break;
 	}
 }
