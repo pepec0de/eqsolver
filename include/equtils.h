@@ -17,13 +17,8 @@ class equtils {
 
         float sum(vector<float> mVector);
 
-        vector<string> getTidied(vector<string> eqArr);
-        float getEqGrade(vector<string> eqArr);
-
-        /*
-        equtils();
-        virtual ~equtils();
-        */
+        vector<string> tidyup(vector<string> eqArr);
+        float getGrade(vector<string> eqArr);
     protected:
 
     private:
