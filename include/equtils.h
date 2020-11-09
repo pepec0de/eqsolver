@@ -13,7 +13,7 @@ class equtils {
         bool hasVarWpow(string element);
         float getVarPow(string element);
 
-        float getElementVar(string element);
+        float getValueFromElVar(string element);
 
         float sum(vector<float> mVector);
 

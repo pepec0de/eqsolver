@@ -41,9 +41,29 @@ float equtils::getVarPow(string element) {
     return 0;
 }
 
-float equtils::getElementVar(string element) {
+// Funcion para obtener el valor que acompaña a una variable x
+float equtils::getValueFromElVar(string element) {
+    if (hasVar(element)) {
+        float result;
+        string val = "";
+        // Obtenemos todos los elementos antes de llegar a la x
+        for (unsigned int i = 0; i < element.size(); i++) {
+            if (element[i] == VAR) break;
+            val += element[i];
+        }
+        // Hacemos un try por si el stof no reconoce numeros
+        try {
+            return stof(val);
+        } catch(exception& e) {
+            cout << "[DEBUG] stof no reconoce el numero : " << val << endl;
+            // Devolvemos 1 por que ya sabemos que la variable esta
+            return 1;
+        }
+        return 0;
+    }
     return 0;
 }
+
 
 float equtils::sum(vector<float> mVector) {
     float result = 0;
@@ -64,28 +84,55 @@ float equtils::getGrade(vector<string> pArr) {
     }
     return grade;
 }
+
 // Funcion para simplificar y ordenar un polinomio de grado n
 vector<string> equtils::tidyup(vector<string> eqArr) {
     vector<string> simplified;
     
-    vector<float> polyVar, polyVal; 
-    bool isEqSymbFound = false;
+    // Tamaño del vector de vectores tiene que ser el grado
+    // +1 para que los terminos independientes tengan hueco
+    int size = getGrade(eqArr)+1;
+    vector<float> poly[size];
+    // Inicializamos los vectores
+
+    float sign = +1;
     for (unsigned int i = 0; i < eqArr.size(); i++) {
+        /*
+         * Iteramos por cada elemento y lo asignamos a un vector
+         * de la matriz doble poly que este en el indice de su potencia
+         * Los terminos independientes estaran en el indice 0
+         */
         string element = eqArr[i];
         if (element == "=") {
-            // Pasamos al otro vector para recoger el otro lado
-            isEqSymbFound = true;
-            // Saltamos la rutina para no almacenar '='
+            // Pasamos al otro vector para recoger el otro lado y cambiamos el
+            // signo de los elementos.
+            sign = -1;
+            // Saltamos el bucle para no almacenar '='
             continue;
         }
-        if (!isEqSymbFound) {
-            // Añadimos el elemento al vector de tipo numerico
-            if (hasVar(element)) {
-
-            }
-        } else {
-
+        
+        if (hasVar(element)) {
+            // Añadimos el elemento al vector (indice : la potencia que tiene
+            // la variable del elemento) de tipo numerico
+            poly[getVarPow(element)].push_back(getValueFromElVar(element)*sign);
+            // Saltamos el bucle para pasar a otro elemento
+            continue;
         }
+        // Como no tiene variable lo añadimos a 0
+        poly[0].push_back(stof(element)*sign);
     }
+    // Cuando ya hemos añadido los todos elementos a sus respectivos
+    // vectores hacemos la suma.
+    for (unsigned int i = size; i < 0; i--) {
+        // Se puede hacer del tiron? o declaramos una variable temporal?
+        
+        // Por si acaso variable temporal:
+        vector<float> temp = poly[i];
+        poly[i] = sum(temp);
+
+        // Cuando ya esta todo sumado lo pasamos a formato: "ax^n +bx^n-k +cx^0 = 0"
+        simplified.push_back();
+    }
+
     return simplified;
 }

@@ -73,8 +73,8 @@ void solveEq(vector<string> eqArr) {
                         polyVal.push_back(stof(element));
                     }
                 }
-			}
-			cout << eqUtils.VAR << " = " << eqUtils.sum(polyVal) << " / " << eqUtils.sum(polyVar) << " = " << eqUtils.sum(polyVal)/eqUtils.sum(polyVar) << endl;
+            }
+            cout << eqUtils.VAR << " = " << eqUtils.sum(polyVal) << " / " << eqUtils.sum(polyVar) << " = " << eqUtils.sum(polyVal)/eqUtils.sum(polyVar) << endl;
         }break;
 		
 		case 2: { // ECUACION DE SEGUNDO GRADO
