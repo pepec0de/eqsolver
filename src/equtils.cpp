@@ -44,7 +44,6 @@ float equtils::getVarPow(string element) {
 // Funcion para obtener el valor que acompaña a una variable x
 float equtils::getValueFromElVar(string element) {
     if (hasVar(element)) {
-        float result;
         string val = "";
         // Obtenemos todos los elementos antes de llegar a la x
         for (unsigned int i = 0; i < element.size(); i++) {
@@ -91,7 +90,7 @@ vector<string> equtils::tidyup(vector<string> eqArr) {
     
     // Tamaño del vector de vectores tiene que ser el grado
     // +1 para que los terminos independientes tengan hueco
-    int size = getGrade(eqArr)+1;
+    unsigned int size = getGrade(eqArr)+1;
     vector<float> poly[size];
     // Inicializamos los vectores
 
@@ -114,7 +113,7 @@ vector<string> equtils::tidyup(vector<string> eqArr) {
         if (hasVar(element)) {
             // Añadimos el elemento al vector (indice : la potencia que tiene
             // la variable del elemento) de tipo numerico
-            poly[getVarPow(element)].push_back(getValueFromElVar(element)*sign);
+            poly[(unsigned int)getVarPow(element)].push_back(getValueFromElVar(element)*sign);
             // Saltamos el bucle para pasar a otro elemento
             continue;
         }
@@ -123,16 +122,22 @@ vector<string> equtils::tidyup(vector<string> eqArr) {
     }
     // Cuando ya hemos añadido los todos elementos a sus respectivos
     // vectores hacemos la suma.
-    for (unsigned int i = size; i < 0; i--) {
-        // Se puede hacer del tiron? o declaramos una variable temporal?
-        
-        // Por si acaso variable temporal:
-        vector<float> temp = poly[i];
-        poly[i] = sum(temp);
+        for (unsigned int i = size; i < 0; i--) {
+            int total = sum(poly[i]);
+            // Limpiamos el vector
+            poly[i] = {0};
+            poly[i][0] = total;
 
-        // Cuando ya esta todo sumado lo pasamos a formato: "ax^n +bx^n-k +cx^0 = 0"
-        simplified.push_back();
-    }
+            // Cuando ya esta todo sumado lo pasamos a formato: "ax^n +bx^n-k +cx +d = 0"
+            if (i == 0) {
+                simplified.push_back("+0"); 
+                continue;
+            } else if (i == 1) {
+                simplified.push_back("+0x"); 
+                continue;
+            }
+        }
+        simplified.push_back("");
 
     return simplified;
 }
