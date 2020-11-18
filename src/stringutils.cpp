@@ -40,19 +40,8 @@ string stringutils::getSubstring(string str, int fromEnd) {
 }
 
 // Converters
-string stringutils::charToStr(char value) {
-	// Una string es un array de chars por tanto:
-	string str;
-    str.push_back(value);
-    return str;
-}
-
-string stringutils::intToStr(int value) {
-    string str;
-    return str;
-}
-
-string stringutils::floatToStr(float value) {
-    string str;
-    return str;
+string stringutils::tostring(float value) {
+    ostringstream strs;
+    strs << value;
+    return strs.str();
 }

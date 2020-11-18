@@ -1,4 +1,7 @@
 #include "../include/equtils.h"
+#include "../include/stringutils.h"
+
+stringutils str;
 
 // Func to check if an element has the var
 bool equtils::hasVar(string element) {
@@ -90,10 +93,10 @@ vector<string> equtils::tidyup(vector<string> eqArr) {
     
     // Tamaño del vector de vectores tiene que ser el grado
     // +1 para que los terminos independientes tengan hueco
-    unsigned int size = getGrade(eqArr)+1;
-    vector<float> poly[size];
+    const unsigned int size = getGrade(eqArr)+1;
+    vector<vector <float>> poly;
+    for (unsigned int i = 0; i < size; i++) poly.push_back({});
     // Inicializamos los vectores
-
     float sign = +1;
     for (unsigned int i = 0; i < eqArr.size(); i++) {
         /*
@@ -120,24 +123,21 @@ vector<string> equtils::tidyup(vector<string> eqArr) {
         // Como no tiene variable lo añadimos a 0
         poly[0].push_back(stof(element)*sign);
     }
+
+    // Iteramos del final hacia el principio
     // Cuando ya hemos añadido los todos elementos a sus respectivos
     // vectores hacemos la suma.
-        for (unsigned int i = size; i < 0; i--) {
-            int total = sum(poly[i]);
-            // Limpiamos el vector
-            poly[i] = {0};
-            poly[i][0] = total;
-
-            // Cuando ya esta todo sumado lo pasamos a formato: "ax^n +bx^n-k +cx +d = 0"
-            if (i == 0) {
-                simplified.push_back("+0"); 
-                continue;
-            } else if (i == 1) {
-                simplified.push_back("+0x"); 
-                continue;
-            }
+    for (int i = (size-1); i > -1; i--) {
+        float total = sum(poly[i]);
+        // Para el futuro:Limpiamos el vector poly[i] = {0}; poly[i][0] = total;
+        // Lo pasamos a formato: "ax^n +bx^n-k +cx +d = 0"
+        if (i == 0) {
+            simplified.push_back(str.tostring(total)); 
+        } else if (i == 1) {
+            simplified.push_back(str.tostring(total) + "x"); 
+        } else {
+            simplified.push_back(str.tostring(total) + "x^" + to_string(i));
         }
-        simplified.push_back("");
-
+    }
     return simplified;
 }

@@ -20,7 +20,7 @@ int main() {
     // encuentra un espacio.
 	getline(cin, eqStr);
 	if (eqStr == "") {
-		eqStr = "4x = 2";
+		//eqStr = "4x = 2";
 		eqStr = "1x^2 +1x -2 = 0";
 	}
 
@@ -43,7 +43,15 @@ int main() {
 	// Dividimos la string en ' ' para recoger los elementos y guardarlos en un vector
 	vector<string> eqArr = strUtils.splitString(eqStr, ' ');
 	cout << "Su ecuación es de nivel: "	<< eqUtils.getGrade(eqArr) << endl;
-	solveEq(eqArr);
+	//solveEq(eqArr);
+    vector<string> simplifiedArr = eqUtils.tidyup(eqArr);
+    string simplifiedStr = simplifiedArr[0];
+    for (unsigned int i = 1; i < simplifiedArr.size(); i++) {
+        simplifiedStr += " "+simplifiedArr[i];
+    }
+    simplifiedStr += " = 0;";
+    cout << "Su ecuación simplificada es: " << simplifiedStr << endl;
+
 }
 
 void solveEq(vector<string> eqArr) {
