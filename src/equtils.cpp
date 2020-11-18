@@ -66,7 +66,7 @@ float equtils::getValueFromElVar(string element) {
     return 0;
 }
 
-
+// Funcion para sumar todos los elementos de un vector
 float equtils::sum(vector<float> mVector) {
     float result = 0;
     for (unsigned int i = 0; i < mVector.size(); i++) {
@@ -77,10 +77,10 @@ float equtils::sum(vector<float> mVector) {
 
 // Funcion para obtener el grado de polinomio/ecuacion
 float equtils::getGrade(vector<string> pArr) {
-    float grade;
+    float grade = 0;
     for (unsigned int i = 0; i < pArr.size(); i++) {
         float currPow = getVarPow(pArr[i]);
-        if(currPow > grade) {
+        if(currPow > grade && getValueFromElVar(pArr[i]) != 0) {
             grade = currPow;
         }
     }
