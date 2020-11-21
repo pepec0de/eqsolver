@@ -44,14 +44,9 @@ int main() {
 	vector<string> eqArr = strUtils.splitString(eqStr, ' ');
 	cout << "Su ecuación es de nivel: "	<< eqUtils.getGrade(eqArr) << endl;
 	//solveEq(eqArr);
-    vector<string> simplifiedArr = eqUtils.tidyup(eqArr);
-    string simplifiedStr = simplifiedArr[0];
-    for (unsigned int i = 1; i < simplifiedArr.size(); i++) {
-        simplifiedStr += " "+simplifiedArr[i];
-    }
-    simplifiedStr += " = 0;";
+    string simplifiedStr = eqUtils.getStrEq(eqUtils.tidyup(eqArr));
     cout << "Su ecuación simplificada es: " << simplifiedStr << endl;
-
+    solveEq(eqArr);
 }
 
 void solveEq(vector<string> eqArr) {
@@ -86,7 +81,18 @@ void solveEq(vector<string> eqArr) {
         }break;
 		
 		case 2: { // ECUACION DE SEGUNDO GRADO
-			
+			/* Aplicamos la ecuacion para : 
+             * a = arr[2]; b = arr[1]; c = arr[0];
+             * x1 = (-b + d) / 2*a;
+             * x2 = (-b - d) / 2*a; 
+             * Siendo d >= 0
+             * d = b^2 -4*a*c
+             */
+
+        }break;
+
+        case 3: { // TERCER GRADO
+                
         }break;
 	}
 }

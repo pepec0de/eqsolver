@@ -17,7 +17,8 @@ class equtils {
 
         float sum(vector<float> mVector);
 
-        vector<string> tidyup(vector<string> eqArr);
+        vector<float> tidyup(vector<string> eqArr);
+        string getStrEq(vector<float> eq);
         float getGrade(vector<string> eqArr);
     protected:
 

@@ -88,14 +88,12 @@ float equtils::getGrade(vector<string> pArr) {
 }
 
 // Funcion para simplificar y ordenar un polinomio de grado n
-vector<string> equtils::tidyup(vector<string> eqArr) {
-    vector<string> simplified;
-    
+vector<float> equtils::tidyup(vector<string> eqArr) {
     // Tamaño del vector de vectores tiene que ser el grado
     // +1 para que los terminos independientes tengan hueco
     const unsigned int size = getGrade(eqArr)+1;
     vector<vector <float>> poly;
-    for (unsigned int i = 0; i < size; i++) poly.push_back({});
+    for (unsigned int i = 0; i < size; i++) poly.push_back({0});
     // Inicializamos los vectores
     float sign = +1;
     for (unsigned int i = 0; i < eqArr.size(); i++) {
@@ -120,24 +118,31 @@ vector<string> equtils::tidyup(vector<string> eqArr) {
             // Saltamos el bucle para pasar a otro elemento
             continue;
         }
-        // Como no tiene variable lo añadimos a 0
+        // Como no tiene variable lo añadimos a idx=0
         poly[0].push_back(stof(element)*sign);
     }
 
     // Iteramos del final hacia el principio
     // Cuando ya hemos añadido los todos elementos a sus respectivos
     // vectores hacemos la suma.
-    for (int i = (size-1); i > -1; i--) {
-        float total = sum(poly[i]);
-        // Para el futuro:Limpiamos el vector poly[i] = {0}; poly[i][0] = total;
-        // Lo pasamos a formato: "ax^n +bx^n-k +cx +d = 0"
-        if (i == 0) {
-            simplified.push_back(str.tostring(total)); 
-        } else if (i == 1) {
-            simplified.push_back(str.tostring(total) + "x"); 
-        } else {
-            simplified.push_back(str.tostring(total) + "x^" + to_string(i));
-        }
+    vector<float> result;
+    // Inicializamos el vector
+    for (unsigned int i = 0; i < size; i++) result.push_back(0);
+    for (unsigned int i = 0; i < size; i++) {
+        // Limpiamos el vector y sumamos el vector
+        result[i] = sum(poly[i]);
     }
-    return simplified;
+    return result;
+}
+
+string equtils::getStrEq(vector<float> eq) {
+    string result = "";
+    for (int i = (eq.size()-1); i > -1; i--) {
+        // Lo pasamos a formato: "ax^n +bx^n-k +cx +d = 0"
+        if (i == 0) result += str.tostring(eq[i]);
+        else if (i == 1) result += str.tostring(eq[i]) + "x";
+        else result += str.tostring(eq[i]) + "x^" + str.tostring(i);
+        result += " ";
+    }
+    return result;
 }
