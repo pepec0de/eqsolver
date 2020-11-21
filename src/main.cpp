@@ -50,21 +50,21 @@ int main() {
 
 void solveEq(vector<float> eq) {
 	switch (eq.size()-1) { // Ecuacion de distintos grados
-		case 1: { // ECUACION DE PRIMER NIVEL
+        case 1: { // ECUACION DE PRIMER NIVEL
             float a = eq[0]*-1;
             float b = eq[1];
             cout << eqUtils.VAR << " = " << a << "/" << b << " = " << a/b << endl;
         }break;
 		
-		case 2: { // ECUACION DE SEGUNDO GRADO
+        case 2: { // ECUACION DE SEGUNDO GRADO
             float a = eq[2];
             float b = eq[1];
             float c = eq[0];
             float d = b*b-4*a*c;
-            float sd = sqrt(d);
             if (d == 0) {
                 cout << eqUtils.VAR << " = " << -b << "/" << 2*a << " = " << -b/2*a << endl;
             } else if (d > 0) {
+                float sd = sqrt(d);
                 cout << eqUtils.VAR << "1 = (" << -b << " + " << sd << ")/" << 2*a << 
                     " = " << (-b+sd)/2*a << endl;
                 cout << eqUtils.VAR << "2 = (" << -b << " - " << sd << ")/" << 2*a << 
