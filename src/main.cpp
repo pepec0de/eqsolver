@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <math.h>
 
 #include "../include/equtils.h"
 #include "../include/stringutils.h"
@@ -52,18 +53,25 @@ void solveEq(vector<float> eq) {
 		case 1: { // ECUACION DE PRIMER NIVEL
             float a = eq[0]*-1;
             float b = eq[1];
-            cout << eqUtils.VAR << " = " << a << " / " << b << " = " << a/b << endl;
+            cout << eqUtils.VAR << " = " << a << "/" << b << " = " << a/b << endl;
         }break;
 		
 		case 2: { // ECUACION DE SEGUNDO GRADO
-			/* Aplicamos la ecuacion para : 
-             * a = arr[2]; b = arr[1]; c = arr[0];
-             * x1 = (-b + d) / 2*a;
-             * x2 = (-b - d) / 2*a; 
-             * Siendo d >= 0
-             * d = b^2 -4*a*c
-             */
-
+            float a = eq[2];
+            float b = eq[1];
+            float c = eq[0];
+            float d = b*b-4*a*c;
+            float sd = sqrt(d);
+            if (d == 0) {
+                cout << eqUtils.VAR << " = " << -b << "/" << 2*a << " = " << -b/2*a << endl;
+            } else if (d > 0) {
+                cout << eqUtils.VAR << "1 = (" << -b << " + " << sd << ")/" << 2*a << 
+                    " = " << (-b+sd)/2*a << endl;
+                cout << eqUtils.VAR << "2 = (" << -b << " - " << sd << ")/" << 2*a << 
+                    " = " << (-b-sd)/2*a << endl;
+            } else {
+                cout << eqUtils.VAR << " = Irreal answer!" << endl;
+            }
         }break;
 
         case 3: { // TERCER GRADO
