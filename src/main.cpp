@@ -6,8 +6,7 @@
 
 using namespace std;
 
-float getEqGrade(vector<string> eqArr);
-void solveEq(vector<string> eqArr);
+void solveEq(vector<float> eq);
 
 equtils eqUtils;
 stringutils strUtils;
@@ -43,41 +42,17 @@ int main() {
 	// Dividimos la string en ' ' para recoger los elementos y guardarlos en un vector
 	vector<string> eqArr = strUtils.splitString(eqStr, ' ');
 	cout << "Su ecuación es de nivel: "	<< eqUtils.getGrade(eqArr) << endl;
-	//solveEq(eqArr);
     string simplifiedStr = eqUtils.getStrEq(eqUtils.tidyup(eqArr));
-    cout << "Su ecuación simplificada es: " << simplifiedStr << endl;
-    solveEq(eqArr);
+    cout << "Su ecuación simplificada es: " << simplifiedStr << " = 0;\n";
+    solveEq(eqUtils.tidyup(eqArr));
 }
 
-void solveEq(vector<string> eqArr) {
-	switch ((int)eqUtils.getGrade(eqArr)) {
+void solveEq(vector<float> eq) {
+	switch (eq.size()-1) { // Ecuacion de distintos grados
 		case 1: { // ECUACION DE PRIMER NIVEL
-			// Hacemos dos vectores de polinomios
-			// Uno con los elementos del primer lado y el otro con los del otro lado
-			vector<float> polyVar, polyVal;
-			bool isEqSymbFound = false;
-			for (unsigned int i = 0; i < eqArr.size(); i++) {
-                string element = eqArr[i];
-				if (element == "=") {
-					// Pasamos al otro vector
-					isEqSymbFound = true;
-					continue;
-				}
-                if (!isEqSymbFound) {
-                    if (eqUtils.hasVar(element)) {
-                        polyVar.push_back(stof(strUtils.getSubstring(element, -1)));
-                    } else {
-                        polyVal.push_back(stof(element)*(-1));
-                    }
-                } else {
-                    if (eqUtils.hasVar(element)) {
-                        polyVar.push_back(stof(strUtils.getSubstring(element, -1))*(-1));
-                    } else {
-                        polyVal.push_back(stof(element));
-                    }
-                }
-            }
-            cout << eqUtils.VAR << " = " << eqUtils.sum(polyVal) << " / " << eqUtils.sum(polyVar) << " = " << eqUtils.sum(polyVal)/eqUtils.sum(polyVar) << endl;
+            float a = eq[0]*-1;
+            float b = eq[1];
+            cout << eqUtils.VAR << " = " << a << " / " << b << " = " << a/b << endl;
         }break;
 		
 		case 2: { // ECUACION DE SEGUNDO GRADO

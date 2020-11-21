@@ -16,10 +16,11 @@ class equtils {
         float getValueFromElVar(string element);
 
         float sum(vector<float> mVector);
+        
+        float getGrade(vector<string> eqArr);
 
         vector<float> tidyup(vector<string> eqArr);
         string getStrEq(vector<float> eq);
-        float getGrade(vector<string> eqArr);
     protected:
 
     private:

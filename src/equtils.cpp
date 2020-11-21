@@ -142,7 +142,7 @@ string equtils::getStrEq(vector<float> eq) {
         if (i == 0) result += str.tostring(eq[i]);
         else if (i == 1) result += str.tostring(eq[i]) + "x";
         else result += str.tostring(eq[i]) + "x^" + str.tostring(i);
-        result += " ";
+        if(i != 0) result += " ";
     }
     return result;
 }
