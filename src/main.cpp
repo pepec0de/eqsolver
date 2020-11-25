@@ -4,11 +4,13 @@
 
 #include "../include/equtils.h"
 #include "../include/stringutils.h"
+#include "../include/solver.h"
 
 using namespace std;
 
 void solveEq(vector<float> eq);
 
+solver solve;
 equtils eqUtils;
 stringutils strUtils;
 
@@ -77,5 +79,9 @@ void solveEq(vector<float> eq) {
         case 3: { // TERCER GRADO
                 
         }break;
+
+        default: { // RUFFINI
+            vector<int> roots = solve.getHornerRoots(eq);
+        }
 	}
 }
