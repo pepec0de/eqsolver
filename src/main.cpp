@@ -23,7 +23,8 @@ int main() {
 	getline(cin, eqStr);
 	if (eqStr == "") {
 		//eqStr = "4x = 2";
-		eqStr = "1x^2 +1x -2 = 0";
+		//eqStr = "1x^2 +1x -2 = 0";
+        eqStr = "1x^3 +2x^2 -1x -2 = 0";
 	}
 
     cout << "Indique la incógnita: ";
@@ -76,12 +77,11 @@ void solveEq(vector<float> eq) {
             }
         }break;
 
-        case 3: { // TERCER GRADO
-                
-        }break;
-
         default: { // RUFFINI
             vector<int> roots = solve.getHornerRoots(eq);
+            for (unsigned int i = 0; i < roots.size(); i++) {
+                cout << "x" << i+1 << " = " << roots[i] << ";\n";
+            }
         }
 	}
 }
