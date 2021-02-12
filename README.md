@@ -1,11 +1,11 @@
 # eqsolver
 $ TODO list
-- Write a simple equation solver (<strike>first grade</strike>, <strike>second grade</strike>, <strike>(any grade) ruffini</strike>).
+- <strike>Write a simple equation solver (first grade, second grade, (any grade) ruffini)</strike>.
 - <strike>Fix the method that uses stof() with the +/-</strike>.
 - <strike>Write Makefile file</strike>.
 + Advanced methods for solving equations:
 - Write the bolzano's bisection method.
-- Write the Newton-Raphson method.
+- Write the Newton-Raphson method (tf to do with derivative).
 - Find more theorems to solve equations...
 
 $ Dirs:
